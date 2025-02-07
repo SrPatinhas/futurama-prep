@@ -1,7 +1,7 @@
 import { RequestError } from './request';
 import { EpisodeDetail, EpisodesList } from './episode';
 import { SeasonEpisode, SeasonDetail, SeasonsList } from './season';
-import { CharacterDetail, CharacterList } from './characters';
+import { CharacterDetail, CharactersList } from './characters';
 
 export {
     RequestError,
@@ -11,5 +11,5 @@ export {
     SeasonDetail,
     SeasonsList,
     CharacterDetail,
-    CharacterList
+    CharactersList
 }

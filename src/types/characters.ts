@@ -9,7 +9,7 @@ export type CharacterDetail = {
 
 }
 
-export type CharacterList = {
+export type CharactersList = {
     "items": CharacterDetail[];
     "total": number;
     "page": number;
