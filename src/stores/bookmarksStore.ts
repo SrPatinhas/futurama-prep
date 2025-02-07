@@ -1,53 +1,57 @@
-import { ref } from 'vue'
 import { defineStore } from 'pinia'
 
-export const useBookmarksStore = defineStore( 'bookmarks', () => {
-    const bookmarkedSeasons = ref<number[]>( [] );
-    const bookmarkedEpisodes = ref<number[]>( [] );
-    const bookmarkedCharacters = ref<number[]>( [] );
+type BookmarksStoreProps = {
+    bookmarkedSeasons: number[];
+    bookmarkedEpisodes: number[];
+    bookmarkedCharacters: number[];
+}
 
-    function toggleSeasonBookmark( seasonId: number ) {
-        // Check if the season is already bookmarks and remove it from the list
-        if(isSeasonBookmarked( seasonId )) {
-            bookmarkedSeasons.value = bookmarkedSeasons.value.filter( id => id !== seasonId )
-        } else {
-            bookmarkedSeasons.value.push( seasonId )
+export const useBookmarksStore = defineStore('bookmarks', {
+    state: ():BookmarksStoreProps => ({
+        bookmarkedSeasons: [],
+        bookmarkedEpisodes: [],
+        bookmarkedCharacters: [],
+    }),
+    getters: {
+        // check if season is bookmarked
+        isSeasonBookmarked: (state:BookmarksStoreProps) => {
+            return (seasonId:number) => state.bookmarkedSeasons.includes( seasonId )
+        },
+        // check if episode is bookmarked
+        isEpisodeBookmarked: (state:BookmarksStoreProps) => {
+            return ( episodeId: number ) => state.bookmarkedEpisodes.includes( episodeId )
+        },
+        // check if character is bookmarked
+        isCharacterBookmarked: (state:BookmarksStoreProps) => {
+            return ( characterId: number ) => state.bookmarkedCharacters.includes( characterId )
         }
-    }
+    },
+    actions: {
+        toggleSeasonBookmark( seasonId: number ) {
+            // Check if the season is already bookmarks and remove it from the list
+            if ( this.isSeasonBookmarked( seasonId ) ) {
+                this.bookmarkedSeasons = this.bookmarkedSeasons.filter( id => id !== seasonId )
+            } else {
+                this.bookmarkedSeasons.push( seasonId )
+            }
+        },
 
-    function toggleEpisodesBookmark( episodeId: number ) {
-        // Check if the episode is already bookmarks and remove it from the list
-        if(isEpisodeBookmarked( episodeId )) {
-            bookmarkedEpisodes.value = bookmarkedEpisodes.value.filter( id => id !== episodeId )
-        } else {
-            bookmarkedEpisodes.value.push( episodeId )
+        toggleEpisodesBookmark( episodeId: number ) {
+            // Check if the episode is already bookmarks and remove it from the list
+            if ( this.isEpisodeBookmarked( episodeId ) ) {
+                this.bookmarkedEpisodes = this.bookmarkedEpisodes.filter( id => id !== episodeId )
+            } else {
+                this.bookmarkedEpisodes.push( episodeId )
+            }
+        },
+
+        toggleCharacterBookmark( characterId: number ) {
+            // Check if the character is already bookmarks and remove it from the list
+            if ( this.isCharacterBookmarked( characterId ) ) {
+                this.bookmarkedCharacters = this.bookmarkedCharacters.filter( id => id !== characterId )
+            } else {
+                this.bookmarkedCharacters.push( characterId )
+            }
         }
-    }
-
-    function toggleCharacterBookmark( characterId: number ) {
-        // Check if the character is already bookmarks and remove it from the list
-        if(isCharacterBookmarked( characterId )) {
-            bookmarkedCharacters.value = bookmarkedCharacters.value.filter( id => id !== characterId )
-        } else {
-            bookmarkedCharacters.value.push( characterId )
-        }
-    }
-
-    // check if season is bookmarked
-    function isSeasonBookmarked( seasonId: number ) {
-        return bookmarkedSeasons.value.includes( seasonId )
-    }
-    // check if episode is bookmarked
-    function isEpisodeBookmarked( episodeId: number ) {
-        return bookmarkedEpisodes.value.includes( episodeId )
-    }
-    // check if character is bookmarked
-    function isCharacterBookmarked( characterId: number ) {
-        return bookmarkedCharacters.value.includes( characterId )
-    }
-
-    return {
-        isEpisodeBookmarked, isSeasonBookmarked, isCharacterBookmarked,
-        toggleEpisodesBookmark, toggleSeasonBookmark, toggleCharacterBookmark
     }
 });
