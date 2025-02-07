@@ -56,6 +56,9 @@ a {
 .card .image img:hover {
     filter: none;
 }
+.card .content {
+    color: #555;
+}
 .card .content, .card footer {
     padding: 1em;
 }
@@ -92,4 +95,141 @@ a {
     .card-grid {
         grid-template-columns: repeat(1, minmax(200px, 1fr));
     }
+}
+
+.season-button {
+    position: fixed;
+    top: 50%;
+}
+.season-button a {
+    background: #006b47;
+    color: #fff;
+    padding: 10px;
+}
+
+.season-button.season-next {
+    right: 10px;
+}
+.season-button.season-previous {
+    left: 10px;
+}
+
+.icon-button {
+    background: transparent;
+    border: 2px solid var(--vt-c-text-light-1);
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 50%;
+    height: 40px;
+    width: 40px;
+}
+.icon-button:hover {
+    background: var(--vt-c-text-light-2);
+}
+
+.icon-button.bookmarked {
+    background: var(--vt-c-text-light-1);
+    color: #fff;
+    border: none;
+}
+
+.episode .image {
+    object-fit: cover;
+    height: 270px;
+}
+
+.episode .image img {
+    object-fit: cover;
+    object-position: top;
+    height: 100%;
+}
+
+
+.pagination-item,
+.pagination-navigation,
+.pagination-more {
+    height: 2.2rem;
+    width: 2.2rem;
+    margin: 0.3rem;
+    font-size: 15px;
+    color: #9ca4c1;
+    font-weight: 700;
+}
+
+.pagination-item,
+.pagination-navigation {
+    background-color: white;
+    border-radius: 4px;
+    transition-property: opacity, color, background-color;
+    transition-duration: 160ms;
+    transition-timing-function: cubic-bezier(0.39, 0.575, 0.565, 1);
+}
+
+.pagination-item {
+    padding: 0 5px;
+}
+.pagination-item.active {
+    color: white;
+    background-color: #7d6ee7;
+}
+.pagination-item:hover, .pagination-item:focus {
+    background-color: #f7f7f7;
+}
+.pagination-item:hover.active, .pagination-item:focus.active {
+    background-color: #8d80ea;
+}
+.pagination-item:active {
+    background-color: #ededed;
+}
+.pagination-item:active.active {
+    background-color: #a095ee;
+}
+
+.pagination-navigation {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 10px;
+    margin-right: 10px;
+    text-decoration: none;
+}
+.pagination-navigation.disabled {
+    opacity: 0.6;
+    cursor: default;
+}
+.pagination-navigation:hover:not(.disabled), .pagination-navigation:focus:not(.disabled) {
+    background-color: #f7f7f7;
+}
+.pagination-navigation:active:not(.disabled) {
+    background-color: #ededed;
+}
+
+.pagination-more {
+    display: inline-flex;
+    align-items: flex-end;
+    justify-content: center;
+}
+
+.pagination {
+    margin: 30px auto;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 100%;
+    width: 100%;
+    padding-left: 0;
+    list-style-type: none;
+}
+.pagination > li {
+    align-items: center;
+    display: flex;
+}
+.pagination button {
+    border: 0;
+    outline: none;
+    cursor: pointer;
+}
+.pagination.disabled {
+    pointer-events: none;
+    opacity: 0.6;
 }

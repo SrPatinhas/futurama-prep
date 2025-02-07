@@ -1,5 +1,5 @@
 <script setup lang="ts">
-    import { defineProps } from 'vue'
+import { defineProps } from 'vue'
     import { SeasonDetail } from '@/types'
     import { useBookmarksStore } from '@/stores/bookmarksStore'
 
@@ -10,9 +10,8 @@
     const bookmark = useBookmarksStore();
 
     function addBookmark() {
-        bookmark.addBookmark(props.season.id);
+        bookmark.toggleSeasonBookmark(props.season.id);
     }
-    const bookmarked = bookmark.isSeasonBookmarked(props.season.id);
 </script>
 
 <template>
@@ -28,14 +27,10 @@
                 <router-link :to="`/season/${season.id}`">Ver Season > </router-link>
             </div>
             <div class="icons">
-                <a href="#" @click="addBookmark">
-                    {{ bookmarked ? "<\/3" : "<3" }}
-                </a>
+                <button :class="{'icon-button': true, 'bookmarked': bookmark.isSeasonBookmarked(props.season.id)}" @click="addBookmark">
+                    {{ bookmark.isSeasonBookmarked(props.season.id) ? "<\/3" : "<3" }}
+                </button>
             </div>
         </footer>
     </div>
 </template>
-
-<style scoped>
-
-</style>
